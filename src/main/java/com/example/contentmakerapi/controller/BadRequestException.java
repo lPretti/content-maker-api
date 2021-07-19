@@ -14,6 +14,7 @@ public class BadRequestException extends  RuntimeException{
         this.status = status;
     }
 
+
     public HttpStatus getStatus() {
         return status;
     }
