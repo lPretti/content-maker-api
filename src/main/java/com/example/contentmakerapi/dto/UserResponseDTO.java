@@ -1,13 +1,12 @@
 package com.example.contentmakerapi.dto;
 
 import com.example.contentmakerapi.entity.User;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class UserResponseDTO {
-    private User user;
+    private String message;
 }
