@@ -1,4 +1,4 @@
-package com.example.contentmakerapi.utils;
+package com.example.contentmakerapi.auth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -42,7 +42,7 @@ public class JwtUtils {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
 
-    private String extractUsername(String token) {
+    public String extractUsername(String token) {
         return  extractClaim(token, Claims::getSubject);
     }
 

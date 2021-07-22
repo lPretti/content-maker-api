@@ -1,4 +1,4 @@
-package com.example.contentmakerapi.service;
+package com.example.contentmakerapi.auth;
 
 import com.example.contentmakerapi.dto.UserRequestDTO;
 import com.example.contentmakerapi.dto.UserResponseDTO;
@@ -36,11 +36,9 @@ public class UserService implements UserDetailsService {
     public UserResponseDTO authenticateUser(UserRequestDTO requestDTO) {
         UserResponseDTO result = new UserResponseDTO("successful authentication");
         try {
-
-
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(requestDTO.getUsername(), requestDTO.getPassword()));
         } catch (Exception e) {
-            result = new UserResponseDTO("no se pudo procesar la operacion");
+            throw  new UserAuthException("exception in authentication user");
         }
         return result;
     }
