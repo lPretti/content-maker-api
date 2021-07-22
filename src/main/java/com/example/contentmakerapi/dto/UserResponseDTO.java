@@ -8,5 +8,6 @@ import lombok.*;
 @Getter
 @Setter
 public class UserResponseDTO {
+    //add user;
     private String message;
 }
