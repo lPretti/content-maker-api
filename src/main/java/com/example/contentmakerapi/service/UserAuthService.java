@@ -18,9 +18,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Optional;
 
-
 @Service
-public class UserService implements UserDetailsService {
+public class UserAuthService implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
@@ -35,7 +34,6 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<UserModel> optionalUser = userRepository.findByUsername(username);
 
-     //   if (!optionalUser.isPresent()) throw new UserAuthException("Username is null or empty");
         if (optionalUser.isEmpty()) throw new UserAuthException("Username is null or empty");
 
         return new User(optionalUser.get().getUsername(),optionalUser.get().getPassword(),new ArrayList<>());
@@ -55,7 +53,7 @@ public class UserService implements UserDetailsService {
     public UserResponseDTO registerUser(UserRequestDTO requestDTO){
 
         validateRequestFields(requestDTO);
-        if(loadUserByUsername(requestDTO.getUsername()) != null){
+        if(userRepository.findByUsername(requestDTO.getUsername()).isPresent()){
             throw new UserAuthException("User already exist");
         }
 
@@ -73,6 +71,4 @@ public class UserService implements UserDetailsService {
             throw new UserAuthException("Password is null or empty");
         }
     }
-
-
 }

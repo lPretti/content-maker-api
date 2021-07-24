@@ -1,7 +1,7 @@
 package com.example.contentmakerapi.config;
 
 import com.example.contentmakerapi.auth.JwtFilter;
-import com.example.contentmakerapi.service.UserService;
+import com.example.contentmakerapi.service.UserAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    UserService userService;
+    UserAuthService userService;
 
     @Autowired
     JwtFilter jwtFilter;
@@ -28,9 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers(("/auth/**"))
+        http.csrf().disable().authorizeRequests().antMatchers(("/auth/**"),("/healthy"))
                 .permitAll().anyRequest().authenticated();
-  //      http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class); // este es el que comente para que andara
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

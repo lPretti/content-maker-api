@@ -2,7 +2,7 @@ package com.example.contentmakerapi.controller;
 
 
 import com.example.contentmakerapi.dto.UserRequestDTO;
-import com.example.contentmakerapi.service.UserService;
+import com.example.contentmakerapi.service.UserAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
 
     @Autowired
-    UserService userService;
+    UserAuthService userService;
 
     @PostMapping("/auth/register")
     public ResponseEntity<?> registerUser(@RequestBody UserRequestDTO requestDTO) {
