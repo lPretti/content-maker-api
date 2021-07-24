@@ -14,21 +14,22 @@ import java.util.function.Function;
 @Service
 public class JwtUtils {
 
-    private static final String SECRET_KEY = "secret";
+    private static final String SECRET_KEY = "simple";
+    private final int TOKEN_DURATION = 1000*60*60*3;
 
-    public String generateToken(UserDetails userDetails){
+    public String generateToken(UserDetails user){
         Map<String,Object> claims =  new HashMap<>();
-        return createToken(claims, userDetails.getUsername());
+        return createToken(claims, user.getUsername());
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails){
+    public Boolean validateToken(String token,UserDetails user){
         String name = extractUsername(token);
-        return name.equals(userDetails.getUsername()) && !isTokenExpired(token);
+        return name.equals(user.getUsername()) && !isTokenExpired(token);
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
         Date now = new Date(System.currentTimeMillis());
-        Date until = new Date(System.currentTimeMillis() + 1000*60*60*3);
+        Date until = new Date(System.currentTimeMillis() + TOKEN_DURATION);
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(now).setExpiration(until)
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }

@@ -1,5 +1,6 @@
 package com.example.contentmakerapi.auth;
 
+import com.example.contentmakerapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +18,9 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
+    private static final String HEADER_TOKEN_PREFIX = "Bearer ";
+    private static final String HEADER_AUTHORIZATION = "Authorization";
+
     @Autowired
     JwtUtils jwtUtils;
 
@@ -25,22 +29,22 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-       String authorizationHeader = request.getHeader("Authorization");
+   /*   String authorizationHeader = request.getHeader(HEADER_AUTHORIZATION);
        String username = null;
        String jwtToken = null;
 
-       if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")){
-           jwtToken = authorizationHeader.substring(7);
+       if(authorizationHeader != null && authorizationHeader.startsWith(HEADER_TOKEN_PREFIX)){
+           jwtToken = authorizationHeader.replace(HEADER_TOKEN_PREFIX,"");
            username = jwtUtils.extractUsername(jwtToken);
        }
        if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
-           UserDetails currentUserDetails = userService.loadUserByUsername(username);
-            Boolean tokenValidated = jwtUtils.validateToken(jwtToken, currentUserDetails);
+           UserDetails currentUser = userService.loadUserByUsername(username);
+            Boolean tokenValidated = jwtUtils.validateToken(jwtToken, currentUser);
             if(tokenValidated) {
-                final UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(currentUserDetails, null);
+                final UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(currentUser, null);
                 usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             }
-       }
-
+       }*/
+       filterChain.doFilter(request,response);
     }
 }
