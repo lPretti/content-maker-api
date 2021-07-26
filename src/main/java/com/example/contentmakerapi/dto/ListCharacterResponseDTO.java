@@ -11,6 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 @Getter
-public class CharacterResponseDTO {
+public class ListCharacterResponseDTO {
     private List<?> characters;
 }

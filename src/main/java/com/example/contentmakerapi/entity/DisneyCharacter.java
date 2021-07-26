@@ -1,5 +1,6 @@
 package com.example.contentmakerapi.entity;
 
+import com.example.contentmakerapi.dto.CharacterDTO;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -35,6 +36,18 @@ public class DisneyCharacter {
                 "name='" + name + '\'' +
                 ", history='" + history + '\'' +
                 '}';
+    }
+
+    public CharacterDTO toDTO(){
+        return new CharacterDTO(
+          this._id,
+          this.name,
+          this.image,
+          this.age,
+          this.weight,
+          this.history,
+          this.movies
+        );
     }
 
 
