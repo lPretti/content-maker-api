@@ -1,6 +1,5 @@
 package com.example.contentmakerapi.controller;
 
-
 import com.example.contentmakerapi.dto.CharacterRequestDTO;
 import com.example.contentmakerapi.service.DisneyCharacterService;
 
@@ -18,10 +17,18 @@ public class DisneyCharacterController {
         return ResponseEntity.ok(service.listAllCharacters());
     }
 
-    @PostMapping("/character")
+    @PostMapping( value = "/characters")
     public ResponseEntity<?> createCharacter(@RequestBody CharacterRequestDTO requestDTO){
         return ResponseEntity.ok(service.createCharacter(requestDTO));
     }
 
+    @PutMapping(name ="/characters/{id}")
+    public ResponseEntity<?> updateCharacter(@PathVariable String id,@RequestBody CharacterRequestDTO requestDTO){
+        return ResponseEntity.ok(service.updateCharacter(id, requestDTO));
+    }
 
+    @DeleteMapping("/characters/{id}")
+    public void deleteCharacter(@PathVariable String id){
+        service.delete(id);
+    }
 }

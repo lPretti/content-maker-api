@@ -13,7 +13,7 @@ import java.util.Date;
 @Document(collection = "movies")
 public class Movie {
     @Id
-    private String _id;
+    private int _id;
     private String image;
     private String title;
     private Date date;
