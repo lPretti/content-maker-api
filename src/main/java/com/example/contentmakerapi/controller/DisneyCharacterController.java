@@ -4,6 +4,7 @@ import com.example.contentmakerapi.dto.CharacterRequestDTO;
 import com.example.contentmakerapi.service.DisneyCharacterService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +23,12 @@ public class DisneyCharacterController {
         return ResponseEntity.ok(service.createCharacter(requestDTO));
     }
 
-    @PutMapping(name ="/characters/{id}")
-    public ResponseEntity<?> updateCharacter(@PathVariable String id,@RequestBody CharacterRequestDTO requestDTO){
-        return ResponseEntity.ok(service.updateCharacter(id, requestDTO));
+    @PutMapping(value ="/characters/{id}")
+    public ResponseEntity<?> updateCharacter(@PathVariable String name,@RequestBody CharacterRequestDTO requestDTO){
+        return ResponseEntity.ok(service.updateCharacter(name, requestDTO));
     }
 
-    @DeleteMapping("/characters/{id}")
+    @DeleteMapping(value = "/characters/{id}")
     public void deleteCharacter(@PathVariable String id){
         service.delete(id);
     }

@@ -44,7 +44,7 @@ public class DisneyCharacterService {
     }
 
     public CharacterDTO updateCharacter(String id, CharacterRequestDTO requestDTO) {
-        Optional<DisneyCharacter> optionalCharacter = repository.findById(id);
+        Optional<DisneyCharacter> optionalCharacter = repository.findByName(id);
         DisneyCharacter character;
 
          if(optionalCharacter.isEmpty()){
