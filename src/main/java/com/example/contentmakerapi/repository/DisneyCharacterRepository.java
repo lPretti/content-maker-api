@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface DisneyCharacterRepository extends MongoRepository<DisneyCharacter, String>, CrudRepository<DisneyCharacter, String> {
+public interface DisneyCharacterRepository extends  MongoRepository<DisneyCharacter, String> {
    Optional<DisneyCharacter> findByName(String name);
-}
+   }

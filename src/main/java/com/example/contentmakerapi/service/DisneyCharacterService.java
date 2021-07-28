@@ -8,6 +8,7 @@ import com.example.contentmakerapi.entity.DisneyCharacter;
 import com.example.contentmakerapi.repository.DisneyCharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class DisneyCharacterService {
     DisneyCharacterRepository repository;
 
     public ListCharacterResponseDTO listAllCharacters(){
-        final List<DisneyCharacter> charactersStored = repository.findAll();
+        final List<DisneyCharacter> charactersStored = (List<DisneyCharacter>) repository.findAll();
         ArrayList<CharacterToListDTO> responseDto_data = new ArrayList<>();
 
         for (DisneyCharacter c:charactersStored) {
@@ -33,8 +34,8 @@ public class DisneyCharacterService {
 
     public CharacterDTO createCharacter(CharacterRequestDTO requestDTO) {
         validateRequestFields(requestDTO);
-
-        if(repository.findByName(requestDTO.getName()).isPresent()){
+        final Optional<DisneyCharacter> byName = repository.findByName(requestDTO.getName());
+        if(byName.isPresent()){
             throw new CharacterServiceException("The Disney Character already exist");
         }
 
@@ -51,6 +52,7 @@ public class DisneyCharacterService {
              character = new DisneyCharacter();
          }else{
              character = optionalCharacter.get();
+             repository.deleteById(id);
          }
 
          character.setImage(requestDTO.getImage());
@@ -63,8 +65,14 @@ public class DisneyCharacterService {
         return repository.save(character).toDTO();
     }
 
+
     public void delete(String id){
-        repository.deleteById(id);
+        if(id != null || id != ""){
+            repository.deleteById(id);
+        }else{
+            new CharacterServiceException("id is null or empty");
+        }
+
     }
 
     private void validateRequestFields(CharacterRequestDTO requestDTO) {
