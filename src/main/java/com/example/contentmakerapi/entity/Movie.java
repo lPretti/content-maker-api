@@ -1,12 +1,13 @@
 package com.example.contentmakerapi.entity;
 
-
+import com.example.contentmakerapi.dto.movie.MovieResponseDTO;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Setter
 @Getter
@@ -16,16 +17,27 @@ public class Movie {
     private String _id;
     private String image;
     private String title;
-    private Date date;
-    private String rating;
+    private LocalDate date;
+    private int rating;
     private ArrayList<DisneyCharacter> cast;
 
+    public Movie(String image, String title, LocalDate date, int rating, ArrayList<DisneyCharacter> cast) {
 
-    public Movie(String image, String title, Date date, String rating) {
         this.image = image;
         this.title = title;
         this.date = date;
         this.rating = rating;
-        this.cast = new ArrayList<>();
+        this.cast = cast;
+    }
+
+    public MovieResponseDTO toDTO(){
+        return new MovieResponseDTO(
+                this._id,
+                this.image,
+                this.title,
+                this.date,
+                this.rating,
+                this.cast
+        );
     }
 }

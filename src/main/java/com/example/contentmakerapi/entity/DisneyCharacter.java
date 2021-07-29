@@ -1,12 +1,15 @@
 package com.example.contentmakerapi.entity;
 
+import com.example.contentmakerapi.dto.character.CharacterResponseDTO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 
+@NoArgsConstructor
 @Setter
 @Getter
 @Document(collection = "characters")
@@ -18,7 +21,7 @@ public class DisneyCharacter {
     private int age;
     private double weight;
     private String history;
-    private ArrayList <Movie> movies;
+    private ArrayList <String> movies;
 
     public DisneyCharacter(String name, String image, int age, double weight, String history) {
         this.name = name;
@@ -35,6 +38,18 @@ public class DisneyCharacter {
                 "name='" + name + '\'' +
                 ", history='" + history + '\'' +
                 '}';
+    }
+
+    public CharacterResponseDTO toDTO(){
+        return new CharacterResponseDTO(
+          this._id,
+          this.name,
+          this.image,
+          this.age,
+          this.weight,
+          this.history,
+          this.movies
+        );
     }
 
 

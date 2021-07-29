@@ -1,16 +1,14 @@
-package com.example.contentmakerapi.dto;
-
+package com.example.contentmakerapi.dto.movie;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
 
 import java.util.List;
 
 @AllArgsConstructor
 @Setter
 @Getter
-public class CharacterResponseDTO {
-    private List<?> characters;
+public class MovieListResponseDTO {
+    private List<?> movies;
 }

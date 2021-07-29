@@ -1,7 +1,7 @@
 package com.example.contentmakerapi.controller;
 
 
-import com.example.contentmakerapi.dto.UserRequestDTO;
+import com.example.contentmakerapi.dto.user.UserRequestDTO;
 import com.example.contentmakerapi.service.UserAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

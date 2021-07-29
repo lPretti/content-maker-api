@@ -1,4 +1,4 @@
-package com.example.contentmakerapi.dto;
+package com.example.contentmakerapi.dto.user;
 
 import lombok.*;
 
