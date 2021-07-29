@@ -32,4 +32,9 @@ public class DisneyCharacterController {
     public void deleteCharacter(@PathVariable("id") String id){
         service.delete(id);
     }
+
+    @GetMapping("/characters/details")
+    public ResponseEntity<?>getCharacterDetails(@RequestBody String id){
+        return ResponseEntity.ok(service.getCharactersDetails(id));
+    }
 }

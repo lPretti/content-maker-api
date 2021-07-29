@@ -3,7 +3,7 @@ package com.example.contentmakerapi.service;
 import com.example.contentmakerapi.dto.movie.MovieResponseDTO;
 import com.example.contentmakerapi.dto.movie.MovieListResponseDTO;
 import com.example.contentmakerapi.dto.movie.MovieRequestDTO;
-import com.example.contentmakerapi.dto.movie.MovieToList;
+import com.example.contentmakerapi.dto.movie.MovieToListDTO;
 import com.example.contentmakerapi.entity.Movie;
 import com.example.contentmakerapi.repository.MovieRepository;
 import com.example.contentmakerapi.service.exception.ServiceException;
@@ -22,10 +22,10 @@ public class MovieService {
 
     public MovieListResponseDTO listAllMovies() {
         final List<Movie> moviesStored = movieRepository.findAll();
-        ArrayList<MovieToList> responseDto_data = new ArrayList<>();
+        ArrayList<MovieToListDTO> responseDto_data = new ArrayList<>();
 
         for (Movie m : moviesStored) {
-            responseDto_data.add(new MovieToList(m.getImage(),m.getTitle(),m.getDate()));
+            responseDto_data.add(new MovieToListDTO(m.getImage(),m.getTitle(),m.getDate()));
         }
 
         return  new MovieListResponseDTO(responseDto_data);
@@ -45,14 +45,13 @@ public class MovieService {
         return movieRepository.save(movie).toDTO();
     }
 
-    public MovieListResponseDTO movieGetDetails(String id) {
+    public MovieResponseDTO movieGetDetails(String id) {
+        final Optional<Movie> optionalMovie = movieRepository.findById(id);
+        if(optionalMovie.isEmpty()){
+            throw new ServiceException("Movie doesn't exist");
+        }
+        return  optionalMovie.get().toDTO();
 
-
-
-
-
-
-        return null;
     }
 
     private void validateRequestFields(MovieRequestDTO requestDTO) {

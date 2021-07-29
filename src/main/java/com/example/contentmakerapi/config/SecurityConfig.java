@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers(("/auth/**"),("/healthy"),("/characters/**"),("/movies/**"))
+        http.csrf().disable().authorizeRequests().antMatchers(("/auth/**"),("/healthy"),("/characters/**"),("/characters/details/**"),("/movies/**"),("/movies/details/**"))
                .permitAll().anyRequest().authenticated();
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }

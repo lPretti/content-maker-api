@@ -27,4 +27,16 @@ public class CharacterResponseDTO {
         this.history = history;
         this.movies = movies;
     }
+
+    @Override
+    public String toString() {
+        return "CharacterResponseDTO{" +
+                "name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", age=" + age +
+                ", weight=" + weight +
+                ", history='" + history + '\'' +
+                ", movies=" + movies +
+                '}';
+    }
 }

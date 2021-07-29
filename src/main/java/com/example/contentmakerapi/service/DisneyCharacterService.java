@@ -90,4 +90,12 @@ public class DisneyCharacterService {
             throw  new ServiceException("history is empty or null");
         }
     }
+
+    public CharacterResponseDTO getCharactersDetails(String id) {
+        final Optional<DisneyCharacter> optionalCharacter = repository.findById(id);
+        if(optionalCharacter.isEmpty()){
+            throw new ServiceException("The Disney Character doesn't exist");
+        }
+        return  optionalCharacter.get().toDTO();
+    }
 }

@@ -19,4 +19,14 @@ public class MovieResponseDTO {
     private int rating;
     private ArrayList<DisneyCharacter> cast;
 
+    @Override
+    public String toString() {
+        return "MovieResponseDTO{" +
+                "image='" + image + '\'' +
+                ", title='" + title + '\'' +
+                ", date=" + date +
+                ", rating=" + rating +
+                ", cast=" + cast +
+                '}';
+    }
 }

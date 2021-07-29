@@ -21,8 +21,8 @@ public class MovieController {
         return ResponseEntity.ok(movieService.createMovie(requestDTO));
     }
 
-    @GetMapping(value = "/movies/{id}")
-    public  ResponseEntity<?> getDetails(@PathVariable("id") String id){
+    @GetMapping(value = "/movies/details")
+    public  ResponseEntity<?> getDetails(@RequestBody String id){
         return ResponseEntity.ok(movieService.movieGetDetails(id));
     }
 }

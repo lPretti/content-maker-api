@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
-public class MovieToList {
+public class MovieToListDTO {
     private String image;
     private String title;
     private LocalDate date;
