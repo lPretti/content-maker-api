@@ -1,11 +1,12 @@
 package com.example.contentmakerapi.service;
 
-import com.example.contentmakerapi.dto.character.CharacterDTO;
+import com.example.contentmakerapi.dto.character.CharacterResponseDTO;
 import com.example.contentmakerapi.dto.character.CharacterRequestDTO;
 import com.example.contentmakerapi.dto.character.CharacterListResponseDTO;
 import com.example.contentmakerapi.dto.character.CharacterToListDTO;
 import com.example.contentmakerapi.entity.DisneyCharacter;
 import com.example.contentmakerapi.repository.DisneyCharacterRepository;
+import com.example.contentmakerapi.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,11 +32,11 @@ public class DisneyCharacterService {
     }
 
 
-    public CharacterDTO createCharacter(CharacterRequestDTO requestDTO) {
+    public CharacterResponseDTO createCharacter(CharacterRequestDTO requestDTO) {
         validateRequestFields(requestDTO);
         final Optional<DisneyCharacter> byName = repository.findByName(requestDTO.getName());
         if(byName.isPresent()){
-            throw new CharacterServiceException("The Disney Character already exist");
+            throw new ServiceException("The Disney Character already exist");
         }
 
         final DisneyCharacter character = new DisneyCharacter(requestDTO.getName(), requestDTO.getImage(), requestDTO.getAge(), requestDTO.getWeight(), requestDTO.getHistory());
@@ -43,7 +44,7 @@ public class DisneyCharacterService {
         return repository.save(character).toDTO();
     }
 
-    public CharacterDTO updateCharacter(String id, CharacterRequestDTO requestDTO) {
+    public CharacterResponseDTO updateCharacter(String id, CharacterRequestDTO requestDTO) {
         Optional<DisneyCharacter> optionalCharacter = repository.findByName(id);
         DisneyCharacter character;
 
@@ -66,32 +67,27 @@ public class DisneyCharacterService {
 
 
     public void delete(String id){
-        if(id != null || id != ""){
             repository.deleteById(id);
-        }else{
-            new CharacterServiceException("id is null or empty");
-        }
-
     }
 
     private void validateRequestFields(CharacterRequestDTO requestDTO) {
         if (requestDTO == null) {
-            throw new CharacterServiceException("request is empty or null");
+            throw new ServiceException("request is empty or null");
         }
         if(requestDTO.getName() == null || requestDTO.getName().equals("")){
-            throw  new CharacterServiceException("name is empty or null");
+            throw  new ServiceException("name is empty or null");
         }
         if(requestDTO.getImage() == null || requestDTO.getImage().equals("")){
-            throw  new CharacterServiceException("image is empty or null");
+            throw  new ServiceException("image is empty or null");
         }
         if(requestDTO.getAge() < 0 ){
-            throw  new CharacterServiceException("age is incorrect");
+            throw  new ServiceException("age is incorrect");
         }
         if(requestDTO.getWeight() < 0.0 ){
-            throw  new CharacterServiceException("weigh is incorrect");
+            throw  new ServiceException("weigh is incorrect");
         }
         if(requestDTO.getHistory() == null || requestDTO.getHistory().equals("")){
-            throw  new CharacterServiceException("history is empty or null");
+            throw  new ServiceException("history is empty or null");
         }
     }
 }

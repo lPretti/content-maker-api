@@ -5,18 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-
 
 @AllArgsConstructor
 @Setter
 @Getter
-public class MovieDTO {
-    private int _id;
+public class MovieResponseDTO {
+    private String _id;
     private String image;
     private String title;
-    private Date date;
+    private LocalDate date;
     private int rating;
     private ArrayList<DisneyCharacter> cast;
 

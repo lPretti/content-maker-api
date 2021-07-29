@@ -1,19 +1,18 @@
 package com.example.contentmakerapi.service;
 
-import com.example.contentmakerapi.dto.character.CharacterListResponseDTO;
-import com.example.contentmakerapi.dto.character.CharacterToListDTO;
-import com.example.contentmakerapi.dto.movie.MovieDTO;
+import com.example.contentmakerapi.dto.movie.MovieResponseDTO;
 import com.example.contentmakerapi.dto.movie.MovieListResponseDTO;
 import com.example.contentmakerapi.dto.movie.MovieRequestDTO;
 import com.example.contentmakerapi.dto.movie.MovieToList;
-import com.example.contentmakerapi.entity.DisneyCharacter;
 import com.example.contentmakerapi.entity.Movie;
 import com.example.contentmakerapi.repository.MovieRepository;
+import com.example.contentmakerapi.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -22,7 +21,7 @@ public class MovieService {
     MovieRepository movieRepository;
 
     public MovieListResponseDTO listAllMovies() {
-        final List<Movie> moviesStored = (List<Movie>) movieRepository.findAll();
+        final List<Movie> moviesStored = movieRepository.findAll();
         ArrayList<MovieToList> responseDto_data = new ArrayList<>();
 
         for (Movie m : moviesStored) {
@@ -33,7 +32,44 @@ public class MovieService {
     }
 
 
-    public MovieDTO createMovie(MovieRequestDTO requestDTO) {
+    public MovieResponseDTO createMovie(MovieRequestDTO requestDTO) {
+        validateRequestFields(requestDTO);
+        final Optional<Movie> optionalMovie = movieRepository.findByTitle(requestDTO.getTitle());
+
+        if(optionalMovie.isPresent()){
+            throw new ServiceException("Movie already exist");
+        }
+
+        final Movie movie = new Movie(requestDTO.getImage(),requestDTO.getTitle(),requestDTO.getDate(),requestDTO.getRating(),requestDTO.getCast());
+
+        return movieRepository.save(movie).toDTO();
+    }
+
+    public MovieListResponseDTO movieGetDetails(String id) {
+
+
+
+
+
+
         return null;
+    }
+
+    private void validateRequestFields(MovieRequestDTO requestDTO) {
+        if (requestDTO == null) {
+            throw new ServiceException("request is empty or null");
+        }
+        if(requestDTO.getTitle() == null || requestDTO.getTitle().equals("")){
+            throw  new ServiceException("title is empty or null");
+        }
+        if(requestDTO.getImage() == null || requestDTO.getImage().equals("")){
+            throw  new ServiceException("image is empty or null");
+        }
+        if(requestDTO.getDate() == null ){
+            throw  new ServiceException("date is null");
+        }
+        if(requestDTO.getRating() < 1 || requestDTO.getRating() > 5){
+            throw  new ServiceException("rating is incorrect");
+        }
     }
 }

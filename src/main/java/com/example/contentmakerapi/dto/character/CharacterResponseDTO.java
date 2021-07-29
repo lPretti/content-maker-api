@@ -9,7 +9,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @Setter
 @Getter
-public class CharacterDTO {
+public class CharacterResponseDTO {
     private String _id;
     private String name;
     private String image;
@@ -18,7 +18,7 @@ public class CharacterDTO {
     private String history;
     private ArrayList<String> movies;
 
-    public CharacterDTO(String _id, String name, String image, int age, double weight, String history, ArrayList<String> movies) {
+    public CharacterResponseDTO(String _id, String name, String image, int age, double weight, String history, ArrayList<String> movies) {
         this._id = _id;
         this.name = name;
         this.image = image;

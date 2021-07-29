@@ -6,19 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
 public class MovieRequestDTO {
-
     private String image;
     private String title;
-    private Date date;
+    private LocalDate date;
     private int rating;
     private ArrayList<DisneyCharacter> cast;
-
 }

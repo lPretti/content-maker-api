@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @Getter
@@ -12,5 +12,14 @@ import java.util.Date;
 public class MovieToList {
     private String image;
     private String title;
-    private Date date;
+    private LocalDate date;
+
+    @Override
+    public String toString() {
+        return "Movie {" +
+                "image='" + image + '\'' +
+                ", title='" + title + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }

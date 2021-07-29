@@ -1,6 +1,6 @@
 package com.example.contentmakerapi.entity;
 
-import com.example.contentmakerapi.dto.character.CharacterDTO;
+import com.example.contentmakerapi.dto.character.CharacterResponseDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,8 +40,8 @@ public class DisneyCharacter {
                 '}';
     }
 
-    public CharacterDTO toDTO(){
-        return new CharacterDTO(
+    public CharacterResponseDTO toDTO(){
+        return new CharacterResponseDTO(
           this._id,
           this.name,
           this.image,
