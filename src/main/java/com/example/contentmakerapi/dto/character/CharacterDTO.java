@@ -1,4 +1,4 @@
-package com.example.contentmakerapi.dto;
+package com.example.contentmakerapi.dto.character;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.Setter;
 import java.util.ArrayList;
 
 @NoArgsConstructor
-
 @Setter
 @Getter
 public class CharacterDTO {

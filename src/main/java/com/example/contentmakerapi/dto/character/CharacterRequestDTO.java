@@ -1,4 +1,4 @@
-package com.example.contentmakerapi.dto;
+package com.example.contentmakerapi.dto.character;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

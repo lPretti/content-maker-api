@@ -17,11 +17,11 @@ public class Movie {
     private String image;
     private String title;
     private Date date;
-    private String rating;
+    private int rating;
     private ArrayList<DisneyCharacter> cast;
 
 
-    public Movie(String image, String title, Date date, String rating) {
+    public Movie(String image, String title, Date date, int rating) {
         this.image = image;
         this.title = title;
         this.date = date;

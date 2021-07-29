@@ -1,4 +1,4 @@
-package com.example.contentmakerapi.controller;
+package com.example.contentmakerapi.controller.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

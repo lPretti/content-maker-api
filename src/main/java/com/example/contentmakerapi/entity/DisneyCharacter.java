@@ -1,6 +1,6 @@
 package com.example.contentmakerapi.entity;
 
-import com.example.contentmakerapi.dto.CharacterDTO;
+import com.example.contentmakerapi.dto.character.CharacterDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

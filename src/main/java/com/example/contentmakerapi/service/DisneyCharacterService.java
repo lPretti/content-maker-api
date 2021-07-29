@@ -1,14 +1,13 @@
 package com.example.contentmakerapi.service;
 
-import com.example.contentmakerapi.dto.CharacterDTO;
-import com.example.contentmakerapi.dto.CharacterRequestDTO;
-import com.example.contentmakerapi.dto.ListCharacterResponseDTO;
-import com.example.contentmakerapi.dto.CharacterToListDTO;
+import com.example.contentmakerapi.dto.character.CharacterDTO;
+import com.example.contentmakerapi.dto.character.CharacterRequestDTO;
+import com.example.contentmakerapi.dto.character.CharacterListResponseDTO;
+import com.example.contentmakerapi.dto.character.CharacterToListDTO;
 import com.example.contentmakerapi.entity.DisneyCharacter;
 import com.example.contentmakerapi.repository.DisneyCharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ public class DisneyCharacterService {
     @Autowired
     DisneyCharacterRepository repository;
 
-    public ListCharacterResponseDTO listAllCharacters(){
+    public CharacterListResponseDTO listAllCharacters(){
         final List<DisneyCharacter> charactersStored = (List<DisneyCharacter>) repository.findAll();
         ArrayList<CharacterToListDTO> responseDto_data = new ArrayList<>();
 
@@ -28,7 +27,7 @@ public class DisneyCharacterService {
             responseDto_data.add(new CharacterToListDTO(c.getImage(),c.getName()));
         }
 
-        return  new ListCharacterResponseDTO(responseDto_data);
+        return  new CharacterListResponseDTO(responseDto_data);
     }
 
 

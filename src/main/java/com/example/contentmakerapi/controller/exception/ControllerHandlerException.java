@@ -1,4 +1,4 @@
-package com.example.contentmakerapi.controller;
+package com.example.contentmakerapi.controller.exception;
 
 import com.example.contentmakerapi.service.CharacterServiceException;
 import org.springframework.http.ResponseEntity;

@@ -2,8 +2,8 @@ package com.example.contentmakerapi.service;
 
 import com.example.contentmakerapi.auth.JwtUtils;
 import com.example.contentmakerapi.auth.UserAuthException;
-import com.example.contentmakerapi.dto.UserRequestDTO;
-import com.example.contentmakerapi.dto.UserResponseDTO;
+import com.example.contentmakerapi.dto.user.UserRequestDTO;
+import com.example.contentmakerapi.dto.user.UserResponseDTO;
 import com.example.contentmakerapi.entity.UserModel;
 import com.example.contentmakerapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
