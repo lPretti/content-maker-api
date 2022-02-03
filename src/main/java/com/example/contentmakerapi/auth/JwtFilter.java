@@ -1,6 +1,6 @@
 package com.example.contentmakerapi.auth;
 
-import com.example.contentmakerapi.service.UserAuthService;
+import com.example.contentmakerapi.services.UserAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,8 +30,8 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
     String authorizationHeader = request.getHeader(HEADER_AUTHORIZATION);
-       String username = null;
-       String jwtToken = null;
+    String username = null;
+    String jwtToken = null;
 
        if(authorizationHeader != null && authorizationHeader.startsWith(HEADER_TOKEN_PREFIX)){
            jwtToken = authorizationHeader.replace(HEADER_TOKEN_PREFIX,"");
