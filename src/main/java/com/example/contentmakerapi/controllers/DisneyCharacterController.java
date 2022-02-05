@@ -1,6 +1,7 @@
 package com.example.contentmakerapi.controllers;
 
 import com.example.contentmakerapi.dtos.character.CharacterRequestDTO;
+import com.example.contentmakerapi.dtos.character.CharacterResponseDTO;
 import com.example.contentmakerapi.services.DisneyCharacterService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,13 @@ public class DisneyCharacterController {
     }
 
     @PostMapping( value = "/characters")
-    public ResponseEntity<?> createCharacter(@RequestBody CharacterRequestDTO requestDTO){
+    public ResponseEntity<CharacterResponseDTO> createCharacter(@RequestBody CharacterRequestDTO requestDTO){
         return ResponseEntity.ok(service.createCharacter(requestDTO));
     }
 
     @CrossOrigin("http://localhost:8080/")
     @PutMapping(value ="/characters/{id}")
-    public ResponseEntity<?> updateCharacter(@RequestBody CharacterRequestDTO requestDTO, @PathVariable("id") String id){
+    public ResponseEntity<CharacterResponseDTO> updateCharacter(@RequestBody CharacterRequestDTO requestDTO, @PathVariable("id") String id){
         return ResponseEntity.ok(service.updateCharacter(id, requestDTO));
     }
 
@@ -38,7 +39,7 @@ public class DisneyCharacterController {
     }
 
     @GetMapping("/characters/details")
-    public ResponseEntity<?>getCharacterDetails(@RequestBody String id){
+    public ResponseEntity<CharacterResponseDTO>getCharacterDetails(@RequestBody String id){
         return ResponseEntity.ok(service.getCharactersDetails(id));
     }
 }
